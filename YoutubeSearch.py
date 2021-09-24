@@ -1,6 +1,5 @@
 # We use the "class" statement to create a class
 from googleapiclient.discovery import build
-import argparse
 
 
 class searchResultClass():
@@ -24,19 +23,13 @@ class YoutubeSearchClass:
                              developerKey=DEVELOPER_KEY)
 
     def youtube_search(self):
-        # adding the args to the youtube search
-        parser = argparse.ArgumentParser()
-        parser.add_argument('--q', help='Search term', default=self.songName)
-        #parser.add_argument('--q', help='Search term', default='madonna like a prayer')
-        parser.add_argument('--max-results', help='Max results', default=25)
-        options = parser.parse_args()
 
         # Call the search.list method to retrieve results matching the specified
         # query term.
         search_response = self.youtube.search().list(
-            q=options.q,
+            q=self.songName,
             part='id,snippet',
-            maxResults=options.max_results
+            maxResults=25
         ).execute()
 
         self.videos = []
